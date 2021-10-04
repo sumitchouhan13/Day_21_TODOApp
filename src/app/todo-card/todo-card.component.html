@@ -1,0 +1,59 @@
+<div class="card">
+  <div class="container mt-4 mb-4">
+    <div class="input-group mb-3">
+      <input
+        id="taskinput"
+        type="text"
+        class="form-control"
+        placeholder="Add a new task"
+        aria-label="Add a new task"
+        aria-describedby="button-addon2"
+        [(ngModel)]="taskvalue"
+      />
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        id="button-addon2"
+        style="margin-left: 10px"
+        (click)="addTask()"
+        [disabled]="!taskvalue"
+      >
+        ADD TASK
+      </button>
+    </div>
+    <ul *ngIf="cardItems.length > 0" class="list-group list-group-flush">
+      <li
+        class="list-group-item d-flex justify-content-between align-items-start"
+        *ngFor="let item of cardItems; let i = index"
+      >
+        <div class="ms-2 me-auto">
+          <p *ngIf="!item.done">
+            <del>{{ item.title }}</del>
+          </p>
+          <p *ngIf="item.done">
+            {{ item.title }}
+          </p>
+        </div>
+        <div class="form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="flexSwitchCheckDisabled"
+            (click)="completeTask(i)"
+          />
+        </div>
+      </li>
+    </ul>
+    <ul *ngIf="cardItems.length == 0" class="list-group list-group-flush">
+      <li class="list-group-item"><b>All tasks have been completed.</b></li>
+    </ul>
+    <button
+      type="button"
+      class="btn"
+      style="background-color: #66b266"
+      (click)="delete()"
+    >
+      CLEAR COMPLETED TASKS
+    </button>
+  </div>
+</div>
